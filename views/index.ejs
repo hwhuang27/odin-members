@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <a href="/new">Add new post</a>
+    <ul>
+      <% messages.forEach(function(msg){%>
+        <li style="font-weight: bold; font-size: 18px"><%= msg.user %></li>
+        <li style="font-size: 16px; margin: 2px 0 6px;"><%= msg.text %></li>
+        <li style="font-size: 14px; margin-bottom: 20px;"><%= msg.added %></li>
+        <% }) %>
+    </ul>
+    
+  </body>
+</html>
