@@ -6,14 +6,16 @@
   </head>
   <body>
       <% if (user) {%>
-        <h1>WELCOME BACK <%= user.username %>
-        </h1>
-        <a href="/board/user/log-out">LOG OUT</a>
-      <%}%>
-    <h1><%= title %></h1>
-    <a href="/board/user/login">Log In</a>
-    <a href="/board/user/signup">Sign Up</a>
-    <ul>
+        <h1>Welcome back, <%= user.username %></h1>
+        <a href="/board/user/logout">Log Out</a>
+      <% } else {%>
+      <a href="/board/user/login">Log In</a>
+      <a href="/board/user/signup">Sign Up</a>
+    <% } %>
+    <h1>
+      <%= title %>
+    </h1>
+      <ul>
       <% messages.forEach(function(msg){%>
         <li style="font-weight: bold; font-size: 18px"><%= msg.user %></li>
         <li style="font-size: 16px; margin: 2px 0 6px;"><%= msg.text %></li>

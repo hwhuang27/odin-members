@@ -3,9 +3,42 @@ const Message = require("../models/message");
 const { body, validationResult } = require("express-validator");
 const asyncHandler = require("express-async-handler");
 const bcrypt = require("bcryptjs");
-// const passport = require("passport");
-// const session = require("express-session");
-// const LocalStrategy = require("passport-local").Strategy;
+const passport = require("passport");
+const session = require("express-session");
+const LocalStrategy = require("passport-local").Strategy;
+
+// authentication functions
+passport.use(
+    new LocalStrategy(async (username, password, done) => {
+        try {
+            const user = await User.findOne({ username: username });
+            if (!user) {
+                return done(null, false, { message: "Incorrect username" });
+            };
+            const match = await bcrypt.compare(password, user.password);
+            if (!match) {
+                // passwords do not match
+                return done(null, false, { message: "Incorrect password" });
+            };
+            return done(null, user);
+        } catch (err) {
+            return done(err);
+        };
+    })
+);
+
+passport.serializeUser(function (user, done) {
+    done(null, user.id);
+});
+
+passport.deserializeUser(async function (id, done) {
+    try {
+        const user = await User.findById(id);
+        done(null, user);
+    } catch (err) {
+        done(err);
+    };
+});
 
 // Create index page (homepage)
 // Display board + pull users & messages data from MongoDB
@@ -40,6 +73,7 @@ exports.user_login_get = asyncHandler(async (req, res, next) => {
 });
 
 exports.user_login_post = [
+    // sanitize & validate
     body("username")
         .trim()
         .isLength({ min: 1 })
@@ -52,9 +86,9 @@ exports.user_login_post = [
         .isLength({ min: 1 })
         .escape()
         .withMessage("Password must be specified."),
+    // handle validation errors
     asyncHandler(async (req, res, next) => {
         const errors = validationResult(req);
-
         if (!errors.isEmpty()) {
             res.render("login", {
                 title: 'Log In',
@@ -63,15 +97,16 @@ exports.user_login_post = [
             });
             return;
         } else {
-            console.log(`authenticating...`);
-            passport.authenticate("local", {
-                successRedirect: "/",
-                failureRedirect: "/board/user/login",
-            })
+            // console.log(`logging in..`);
+            next();
         }
     }),
+    // authenticate with passport middleware
+    passport.authenticate("local", {
+        successRedirect: "/",
+        failureRedirect: "/board/user/login",
+    }),
 ];
-
 exports.user_signup_get = asyncHandler(async (req, res, next) => {
     res.render('signup',
         {
