@@ -5,8 +5,14 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
+      <% if (user) {%>
+        <h1>WELCOME BACK <%= user.username %>
+        </h1>
+        <a href="/board/user/log-out">LOG OUT</a>
+      <%}%>
     <h1><%= title %></h1>
-    <a href="/new">Add new post</a>
+    <a href="/board/user/login">Log In</a>
+    <a href="/board/user/signup">Sign Up</a>
     <ul>
       <% messages.forEach(function(msg){%>
         <li style="font-weight: bold; font-size: 18px"><%= msg.user %></li>

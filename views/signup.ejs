@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        <%= title %>
+    </title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+    <h1>
+        <%= heading %>
+    </h1>
+    <form method="POST" action="/board/user/signup">
+
+        <label for="first_name">First Name </label>
+        <span><input type="text" name="first_name" id="first_name"></span>
+
+        <label for="last_name">Last Name </label>
+        <span><input type="text" name="last_name" id="last_name"></span>
+
+        <label for="username">Username </label>
+        <span><input type="text" name="username" id="username"></span>
+
+        <label for="password">Password </label>
+        <span><input type="password" name="password" id="password"></span>
+
+        <label for="confirm-password">Confirm Password </label>
+        <span><input type="password" name="confirm-password" id="confirm-password"></span>
+        <br><br>
+        <!-- Admin checkbox here (or make another members page) -->
+
+        <!-- <label for="message">Message</label>
+        <textarea name="message" cols="40" rows="8"></textarea> -->
+        <button type="submit">Submit</button>
+    </form>
+</body>
+
+</html>

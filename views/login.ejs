@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        <%= title %>
+    </title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+    <h1>
+        <%= heading %>
+    </h1>
+    <form method="POST" action="/board/user/login">
+
+        <label for="username">Username </label>
+        <span><input type="text" name="username" id="username"></span>
+
+        <label for="password">Password </label>
+        <span><input type="password" name="password" id="password"></span>
+        
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+
+</html>
