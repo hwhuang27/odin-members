@@ -203,7 +203,7 @@ exports.user_membership_post = [
         .custom((value, { req }) => {
             return value === 'secretvalue';
         })
-        .withMessage("Wrong, try again."),
+        .withMessage("Wrong value, try again."),
     asyncHandler(async (req, res, next) => {
         const errors = validationResult(req);
 
@@ -218,15 +218,7 @@ exports.user_membership_post = [
             return;
         } else {    
             // update user + redirect to homepage
-
-            // Create User object with escaped and trimmed data
-            // const user = new User({
-            //     first_name: req.body.first_name,
-            //     last_name: req.body.last_name,
-            //     username: req.body.username,
-            //     password: hashedPassword,
-            // });
-            // const result = await user.save();
+            await User.findOneAndUpdate({_id: req.params.id}, {membership_status: "Member"});
             res.redirect("/");
         }
     }),
