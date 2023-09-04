@@ -189,6 +189,7 @@ exports.user_logout_get = asyncHandler(async (req, res, next) => {
 });
 
 exports.user_membership_get = asyncHandler(async (req, res, next) => {
+    // Render "You are already a member" page if user is already a member
     res.render('membership',
         {
             title: 'Membership',
@@ -219,6 +220,46 @@ exports.user_membership_post = [
         } else {    
             // update user + redirect to homepage
             await User.findOneAndUpdate({_id: req.params.id}, {membership_status: "Member"});
+            res.redirect("/");
+        }
+    }),
+];
+
+exports.user_message_get = asyncHandler(async (req, res, next) => {
+    res.render('message',
+        {
+            title: 'New Message',
+            heading: 'Create a new Message',
+            user: req.user,
+        });
+});
+
+exports.user_message_post = [
+    body('message')
+        .trim()
+        .isLength({ min: 1 })
+        .escape()
+        .withMessage("Please enter a valid message."),
+    asyncHandler(async (req, res, next) => {
+        const errors = validationResult(req);
+
+        if (!errors.isEmpty()) {
+            res.render('message',
+                {
+                    title: 'New Message',
+                    heading: 'Create a new Message',
+                    user: req.user,
+                    errors: errors.array(),
+                });
+            return;
+        } else {
+            // add new Message and redirect
+            const message = new Message({
+                author: req.params.id,
+                title: req.body.title,
+                text: req.body.message,
+            });
+            await message.save();
             res.redirect("/");
         }
     }),

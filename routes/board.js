@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 
 const user_controller = require("../controllers/userController");
-// const message_controller = require("../controllers/messageController");
 
 /// USER ROUTES ///
 
@@ -30,7 +29,11 @@ router.get("/user/:id/membership", user_controller.user_membership_get);
 // POST request for adding User membership
 router.post("/user/:id/membership", user_controller.user_membership_post);
 
-/// MESSAGES ROUTES ///
+// GET request for adding new message from User
+router.get("/user/:id/new", user_controller.user_message_get);
+
+// POST request for adding new message from User
+router.post("/user/:id/new", user_controller.user_message_post);
 
 
 module.exports = router;
