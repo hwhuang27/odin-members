@@ -107,6 +107,7 @@ exports.user_login_post = [
         failureRedirect: "/board/user/login",
     }),
 ];
+
 exports.user_signup_get = asyncHandler(async (req, res, next) => {
     res.render('signup',
         {
@@ -174,6 +175,59 @@ exports.user_signup_post = [
                 const result = await user.save();
                 res.redirect("/");
             });
+        }
+    }),
+];
+
+exports.user_logout_get = asyncHandler(async (req, res, next) => {
+    req.logout(function (err) {
+        if (err) {
+            return next(err);
+        }
+        res.redirect("/");
+    });
+});
+
+exports.user_membership_get = asyncHandler(async (req, res, next) => {
+    res.render('membership',
+        {
+            title: 'Membership',
+            heading: 'Apply for Membership',
+            user: req.user,
+        });
+});
+
+exports.user_membership_post = [
+    body('secret')
+        .escape()
+        .custom((value, { req }) => {
+            return value === 'secretvalue';
+        })
+        .withMessage("Wrong, try again."),
+    asyncHandler(async (req, res, next) => {
+        const errors = validationResult(req);
+
+        if (!errors.isEmpty()) {
+            res.render('membership',
+                {
+                    title: 'Membership',
+                    heading: 'Apply for Membership',
+                    user: req.user,
+                    errors: errors.array(),
+                });
+            return;
+        } else {    
+            // update user + redirect to homepage
+
+            // Create User object with escaped and trimmed data
+            // const user = new User({
+            //     first_name: req.body.first_name,
+            //     last_name: req.body.last_name,
+            //     username: req.body.username,
+            //     password: hashedPassword,
+            // });
+            // const result = await user.save();
+            res.redirect("/");
         }
     }),
 ];

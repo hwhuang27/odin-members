@@ -18,16 +18,17 @@ router.post("/user/signup", user_controller.user_signup_post);
 // GET request for User login
 router.get("/user/login", user_controller.user_login_get);
 
-// // POST request for User login
+// POST request for User login
 router.post("/user/login", user_controller.user_login_post);
 
+// GET request for User logout
+router.get("/user/logout", user_controller.user_logout_get);
 
+// GET request for adding User membership
+router.get("/user/:id/membership", user_controller.user_membership_get);
 
-// // GET request for adding User membership
-// router.get("/user/:id/membership", user_controller.user_membership_get);
-
-// // POST request for adding User membership
-// router.post("/user/:id/membership", user_controller.user_membership_post);
+// POST request for adding User membership
+router.post("/user/:id/membership", user_controller.user_membership_post);
 
 /// MESSAGES ROUTES ///
 
