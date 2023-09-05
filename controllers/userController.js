@@ -43,19 +43,11 @@ passport.deserializeUser(async function (id, done) {
 // Create index page (homepage)
 // Display board + pull users & messages data from MongoDB
 exports.index = asyncHandler(async (req, res, next) => {
-    const messages = [
-        {
-            text: "Hi there!",
-            user: "Amando",
-            added: new Date()
-        },
-        {
-            text: "Hello World!",
-            user: "Charles",
-            added: new Date()
-        }
-    ];
-    
+    const messages = await Message.find()
+        .sort({timestamp: 1})
+        .populate("author")
+        .exec();
+        
     res.render('index',
         {
             title: 'Message Board',

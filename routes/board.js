@@ -3,8 +3,6 @@ var router = express.Router();
 
 const user_controller = require("../controllers/userController");
 
-/// USER ROUTES ///
-
 // GET message board home page.
 router.get("/", user_controller.index);
 
