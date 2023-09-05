@@ -33,5 +33,7 @@ router.get("/user/:id/new", user_controller.user_message_get);
 // POST request for adding new message from User
 router.post("/user/:id/new", user_controller.user_message_post);
 
+// POST request for deleting a message by admin
+router.post("/message/:id/delete", user_controller.user_message_delete_post);
 
 module.exports = router;

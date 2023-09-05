@@ -18,30 +18,29 @@
     <h1>
       <%= title %>
     </h1>
-
-      <% if (user && user.membership_status === 'Member') {%>
       <ul>
       <% messages.forEach(function(msg){%>
+        <% if (user && user.membership_status==='Member' ) {%>
         <li style="font-weight: bold; font-size: 18px">By: <%= msg.author.full_name %></li>
-        <li style="font-size: 14px;">
-          <%= msg.timestamp_formatted %>
-        </li>
+        <li style="font-size: 14px;"><%= msg.timestamp_formatted %></li>
+        <% } %>
 
         <li style="font-weight: bold; font-size: 18px"><%= msg.title %></li>
-        <li style="font-size: 16px; margin: 2px 0 20px;"><%= msg.text %></li>
+        <li style="font-size: 16px; margin: 2px 0 6px;"><%= msg.text %></li>
+        <% if (user && user.admin_status==='Admin' ) {%>
+
+          <form method="POST" action="/board/<%= msg.url %>/delete">
+            <input type="hidden" name="extra_submit_param" value="extra_submit_value">
+            <button type="submit" name="submit_param" value="submit_value" id="delete_anchor">
+              Delete
+            </button>
+          </form>
+
+          </form>
+        <% } %>
+
+
         <% }) %>
       </ul>
-    <% } else {%>
-      <ul>
-        <% messages.forEach(function(msg){%>    
-          <li style="font-weight: bold; font-size: 18px">
-            <%= msg.title %>
-          </li>
-          <li style="font-size: 16px; margin: 2px 0 20px;">
-            <%= msg.text %>
-          </li>
-          <% }) %>
-      </ul>
-    <% } %>
   </body>
 </html>

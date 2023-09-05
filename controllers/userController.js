@@ -163,6 +163,7 @@ exports.user_signup_post = [
                     last_name: req.body.last_name,
                     username: req.body.username,
                     password: hashedPassword,
+                    admin_status: req.body.admin_status,
                 });
                 const result = await user.save();
                 res.redirect("/");
@@ -256,3 +257,8 @@ exports.user_message_post = [
         }
     }),
 ];
+
+exports.user_message_delete_post = asyncHandler(async (req, res, next) => {
+    await Message.findByIdAndRemove({_id: req.params.id});
+    res.redirect("/board");
+});
