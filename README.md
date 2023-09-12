@@ -6,7 +6,7 @@ https://odin-members-production.up.railway.app/
 
 NodeJS practice project for [The Odin Project](https://www.theodinproject.com/).
 
-Built with [Express](https://expressjs.com/) and [MongoDB](https://www.mongodb.com/) with [Mongoose](https://mongoosejs.com/).
+Built with [Express](https://expressjs.com/) and [MongoDB](https://www.mongodb.com/), and deployed with [Railway](https://railway.app/)
 
 Authentication implemented using [PassportJS](https://www.passportjs.org/) with passport-local strategy.
 
