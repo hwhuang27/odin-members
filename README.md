@@ -1,6 +1,8 @@
 # Members Only Project
 
-Message board back-end website with username/password authentication and various user privileges (basic, member, admin). 
+Message board back-end website with username/password authentication.\
+Includes various user privileges (basic, member, admin).\
+Railway link goes here
 
 NodeJS practice project for [The Odin Project](https://www.theodinproject.com/).
 
