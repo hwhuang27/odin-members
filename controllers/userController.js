@@ -195,7 +195,7 @@ exports.user_membership_post = [
     body('secret')
         .escape()
         .custom((value, { req }) => {
-            return value === 'secretvalue';
+            return value === 'secret';
         })
         .withMessage("Wrong value, try again."),
     asyncHandler(async (req, res, next) => {
