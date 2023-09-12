@@ -2,7 +2,7 @@
 
 Message board back-end website with username/password authentication.\
 Includes various user privileges (basic, member, admin).\
-Railway link goes here
+https://odin-members-production.up.railway.app/
 
 NodeJS practice project for [The Odin Project](https://www.theodinproject.com/).
 
