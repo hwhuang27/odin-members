@@ -1,7 +1,8 @@
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
-const session = require("express-session");
+// const session = require("express-session");
+const session = require("cookie-session");
 const passport = require("passport");
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
@@ -17,13 +18,13 @@ const boardRouter = require('./routes/board');
 const mongoose = require('mongoose');
 mongoose.set("strictQuery", false);
 const mongoDB = process.env.MONGODB_URI;
-mongoose.connect(mongoDB, { useUnifiedTopology: true, useNewUrlParser: true });
-const db = mongoose.connection;
-db.on("error", console.error.bind(console, "mongo connection error"));
+main().catch((err) => console.log(err));
+async function main() {
+  await mongoose.connect(mongoDB);
+  console.log(`Connected to MongoDB`);
+}
 
 const app = express();
-
-
 
 // view engine
 app.set('views', path.join(__dirname, 'views'));
