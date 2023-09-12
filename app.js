@@ -14,23 +14,22 @@ require('dotenv').config();
 const indexRouter = require('./routes/index');
 const boardRouter = require('./routes/board');
 
+const app = express();
+
 // database
 const mongoose = require('mongoose');
 mongoose.set("strictQuery", false);
 const mongoDB = process.env.MONGODB_URI;
+
 main().catch((err) => console.log(err));
 async function main() {
   await mongoose.connect(mongoDB);
   console.log(`Connected to MongoDB`);
 }
 
-const app = express();
-
 // view engine
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
-app.set('trust proxy', true);
 
 // middleware
 const RateLimit = require("express-rate-limit");
@@ -39,7 +38,17 @@ const limiter = RateLimit({
   max: 20,
 });
 app.use(limiter);
-app.use(helmet());
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      "script-src": ["'self'", "code.jquery.com", "cdn.jsdelivr.net"],
+    },
+  }),
+);
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 app.use(session({ secret: "cats", resave: false, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -47,10 +56,6 @@ app.use(function (req, res, next) {
   res.locals.currentUser = req.user;
   next();
 });
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(compression());
 app.use(express.static(path.join(__dirname, 'public')));
 
