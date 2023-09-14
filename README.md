@@ -11,3 +11,5 @@ Built with [Express](https://expressjs.com/) and [MongoDB](https://www.mongodb.c
 Authentication implemented using [PassportJS](https://www.passportjs.org/) with passport-local strategy.
 
 Passwords hashed with [bcryptjs](https://www.npmjs.com/package/bcryptjs).
+
+Views generated with [EJS](https://ejs.co/).
