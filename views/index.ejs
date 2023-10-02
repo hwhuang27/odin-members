@@ -26,7 +26,7 @@
         <% } %>
 
         <li style="font-weight: bold; font-size: 18px"><%= msg.title %></li>
-        <li style="font-size: 16px; margin: 2px 0 20px;"><%= msg.text %></li>
+        <li style="font-size: 16px; margin: 2px 0 8px;"><%= msg.text %></li>
         <% if (user && user.admin_status==='Admin' ) {%>
 
           <form method="POST" action="/board/<%= msg.url %>/delete">
