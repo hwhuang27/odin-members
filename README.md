@@ -1,17 +1,25 @@
-# Members Only
+# ✉️ Members Only ✉️
 
-Message board website where users can view and post anonymous messages. 
+Message board website where users can view and post anonymous messages.
+
+NodeJS practice project for [The Odin Project](https://www.theodinproject.com/).
+
+Deployed Railway site can be found [here](https://odin-members-production.up.railway.app).
+
+## ✨ Features ✨
 
 There are several user privileges:  
 - **Non-Member** (can only view posts and post title)
 - **Member** (can view post authors with timestamp)
 - **Admin** (can view and delete messages)
 
-Deployed Railway website can be found [here](https://odin-members-production.up.railway.app).
+- CRUD operations for users and posts
+- Local username & password authentication
+- Passwords hashed with bcrypt
+- Form validation & sanitization
+- Generated HTML with EJS
 
-NodeJS practice project for [The Odin Project](https://www.theodinproject.com/).
-
-## Built with...
+## 🛠️ Built with... 🛠️
 
 - [NodeJS](https://nodejs.org/en) and [Express](https://expressjs.com/)
 - [MongoDB](https://www.mongodb.com/) for database
