@@ -29,4 +29,8 @@ There are several user privileges:
 
 ## 📷 Screenshots 📷
 
-![alt text]()
+#### Non-Members view
+![non-member](https://raw.githubusercontent.com/hwhuang27/odin-members/main/public/images/chrome_6q4hLM7R2z.png)
+
+#### Members + Admin view
+![member and admin](https://raw.githubusercontent.com/hwhuang27/odin-members/main/public/images/chrome_wF4j60XVNb.png)
