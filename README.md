@@ -26,3 +26,7 @@ There are several user privileges:
 - [PassportJS](https://www.passportjs.org/) and [bcryptjs](https://www.npmjs.com/package/bcryptjs) for user authentication
 - [EJS](https://ejs.co/) for view templates
 - [Railway](https://railway.app/) for deployment
+
+## 📷 Screenshots 📷
+
+![alt text]()
